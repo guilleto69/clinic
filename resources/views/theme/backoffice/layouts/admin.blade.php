@@ -19,5 +19,6 @@
       </div>   
       @include('theme.backoffice.layouts.includes.footer')    
       @include('theme.backoffice.layouts.includes.foot')
+      @include('sweetalert::alert')
   </body>
 </html>

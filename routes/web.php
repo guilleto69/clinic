@@ -10,17 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(['verify' => true]);
 
-Route::get('/', function () {
+ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('demo', function () {
+ Route::get('/home', 'HomeController@index')->name('home'); 
+  
+/* Route::get('demo', function () {
     return view('theme.backoffice.pages.demo');
+}); */
+
+//backoffice
+ Route::group(['middleware' => ['auth'], 'as' => 'backoffice.'], function () {
+    //Route::get('role', 'RoleController@index')->name('role.index');
+    Route::resource('role', 'RoleController');
 });
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-

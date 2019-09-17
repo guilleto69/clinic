@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Role extends Model
 {
@@ -24,7 +25,23 @@ class Role extends Model
     }
 
 //ALMACENAMIENTO
+    public function store($request)
+    {
+        $slug = str::slug($request->name, '-');
+        toast('Role Guardado!','success', 'top-right');
+        /* alert('Exito!', 'El Role se ha Guardado','success')->showConfirmButton(); */ 
+        return self::create($request->all() + [
+            'slug'=> $slug,
+        ] );
+        
+    }
 
+    public function my_update($request)
+    {
+        $slug = str::slug($request->name, '-');
+        toast('Role Actualizado!','success', 'top-right');
+        self::update($request->all() + ['slug'=>$slug]);
+    }
 //VALIDACION
 
 //RECUPERACION DE INFORMACION
