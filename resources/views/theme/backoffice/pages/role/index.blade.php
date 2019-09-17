@@ -6,6 +6,16 @@
 
 @endsection
 
+@section('breadcumbs')
+
+    <li><a href="{{ route('backoffice.role.index')}}" >Roles del Sistema</a></li>
+@endsection
+
+
+@section('dropdown_settings')
+    <li><a href="{{ route('backoffice.role.create')}}" class="grey-text text-darken-2">Crear Rol</a></li>
+@endsection
+
 @section('content')
     
     <div class="section">
@@ -14,8 +24,8 @@
         <div id="basic-form" class="section">
             <div class="row">
                 <div class="col s12">
-                    <div class="card-panel">                    
-                        <div class="row">
+                    <div class="card">                    
+                        <div class="card-content">
                             <table>
                                 <thead>
                                     <tr>

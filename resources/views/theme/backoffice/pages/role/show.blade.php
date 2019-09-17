@@ -3,7 +3,11 @@
 @section('title', 'Hist. Clinica')
 
 @section('head')
+@endsection
 
+@section('breadcumbs')
+    <li><a href="{{ route('backoffice.role.index')}}" >Roles del Sistema</a></li>
+    <li>{{ $role->name }}></li>
 @endsection
 
 @section('content')
@@ -14,13 +18,16 @@
         <div id="basic-form" class="section">
             <div class="row">
                 <div class="col s12 m8 offset-m2">
-                    <div class="card-panel">
-                    <h4 class="header2">Usuarios con el rol de: {{$role->name}}</h4>
-                        <div class="row">
-                            <p><strong>Slug: </strong>{{ $role->slug}}</p>   
-                            <p><strong>Descripcion: : </strong>{{ $role->description}}</p>
-                            <p><a href="#" style="color: red" onclick="enviar_formulario()">Eliminar</a></p> 
-                        </div>
+                    <div class="card">
+                            <div class="card-content">   
+                                <span class="card-title">Usuarios con el rol de: {{$role->name}}</span>
+                                <p><strong>Slug: </strong>{{ $role->slug}}</p>   
+                                <p><strong>Descripcion: : </strong>{{ $role->description}}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="{{ route('backoffice.role.edit', $role) }}">Editar</a>
+                                <a href="#" style="color: red" onclick="enviar_formulario()">ELIMINAR</a>
+                            </div>
                     </div>
                 </div>                    
             </div>
