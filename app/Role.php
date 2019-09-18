@@ -27,9 +27,9 @@ class Role extends Model
 //ALMACENAMIENTO
     public function store($request)
     {
-        $slug = str::slug($request->name, '-');
+        $slug = str_slug($request->name, '-');
         toast('Role Guardado!','success', 'top-right');
-        /* alert('Exito!', 'El Role se ha Guardado','success')->showConfirmButton(); */ 
+        /* alert('Exito!', 'El Role se ha Guardado','success')->showConfirmButton(); */
         return self::create($request->all() + [
             'slug'=> $slug,
         ] );
@@ -38,9 +38,10 @@ class Role extends Model
 
     public function my_update($request)
     {
-        $slug = str::slug($request->name, '-');
+        $slug = str_slug($request->name, '-');
         toast('Role Actualizado!','success', 'top-right');
         self::update($request->all() + ['slug'=>$slug]);
+        /* alert('Exito!', 'El Role se ha Actualizado','success')->showConfirmButton(); */
     }
 //VALIDACION
 

@@ -1,6 +1,6 @@
 @extends('theme.backoffice.layouts.admin')
 
-@section('title', 'Editar Rol:'. $role->name)
+@section('title', 'Editar Rol: '. $role->name)
 
 @section('head')
 
@@ -28,7 +28,7 @@
                                     {{ method_field('PUT') }} {{--  ya que el FORM no puede pasr PUT --}}
                                     <div class="row">
                                         <div class="input-field col s12">                                       
-                                            <input id="name" type="text" name="name" value={{$role->name}}> 
+                                            <input id="name" type="text" name="name" value="{{$role->name}}"> 
                                             <label for="name">Nombre del Rol</label>
                                             @if ($errors->has('name'))
                                                 <span class="invalid-feedback" role="alert">

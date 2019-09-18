@@ -17,13 +17,10 @@ Auth::routes(['verify' => true]);
 });
 
  Route::get('/home', 'HomeController@index')->name('home'); 
-  
-/* Route::get('demo', function () {
-    return view('theme.backoffice.pages.demo');
-}); */
 
 //backoffice
  Route::group(['middleware' => ['auth'], 'as' => 'backoffice.'], function () {
     //Route::get('role', 'RoleController@index')->name('role.index');
     Route::resource('role', 'RoleController');
+    Route::resource('permission', 'PermissionController');
 });
