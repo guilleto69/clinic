@@ -40,8 +40,15 @@
               </li>
 
               <li class="bold">
+                  <a href="{{ route('backoffice.user.index')}}" class="waves-effect waves-cyan">
+                      <i class="material-icons">people</i>
+                      <span class="nav-text">Usuarios del Sistema</span>
+                    </a>
+              </li>
+
+              <li class="bold">
                   <a href="{{ route('backoffice.role.index')}}" class="waves-effect waves-cyan">
-                      <i class="material-icons">perm_identity</i>
+                      <i class="material-icons">settings</i>
                       <span class="nav-text">Roles del Sistema</span>
                     </a>
                 </li>

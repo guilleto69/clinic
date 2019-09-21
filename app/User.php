@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //RELACIONES
         public function permissions()
         {
-            return $this->belogsToMany('App\Permission');
+            return $this->belongsToMany('App\Permission');
         }
 
         public function roles()
@@ -38,6 +38,29 @@ class User extends Authenticatable implements MustVerifyEmail
     //ALMACENAMIENTO
 
     //VALIDACION
+        public function has_role($id)
+        {
+            foreach($this->roles as $role){
+                if ($role->id == $id || $role->slug==$id) return true;
+            }
+            return false;
+        }
+
+        public function has_permission($id)
+        {
+            foreach($this->permissions as $permission) {
+                if ($permission->id == $id || $permission->slug == $id) return true;
+            }
+            return false;            
+        }
+
+        /* public function is_admin($id)
+        {
+            foreach($this->roles as $role){
+                if ($role->id == 1 || $role->slug==$id) return true;
+            }
+            return false;
+        } */
 
     //RECUPERACION DE INFORMACION
 

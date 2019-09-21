@@ -56,9 +56,7 @@ class PermissionController extends Controller
     {
         $role = $permission->role;
         $permission->delete();
-        /* {{dd($role);}} */
         toast('Permiso Eliminado!','success', 'top-right');
-        /* alert('Exito', 'Permiso Eliminado', 'success')->showConfirmButton; */
         return redirect()->route('backoffice.role.show', $role);
     }
 }
