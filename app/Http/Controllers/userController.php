@@ -47,6 +47,7 @@ class userController extends Controller
     {
         //
     }
+    
     // Mostrar formulario para asignar Rol
     public function assign_role(User $user)
     {
@@ -55,12 +56,12 @@ class userController extends Controller
             'roles' => Role::all(),
         ]);
     }
+
     // Permite asignar los roles en la tabla Pivote de la DB
     public function role_assigment(Request $request, User $user)
     {  
         //sincroniza los Roles del User por medio de la tabla Pivote "role_user"
-        $user->roles()->sync($request->roles);
-        toast('Roles Asignados!','success', 'top-right');
+        $user->role_assigment( $request);
         return redirect()->route('backoffice.user.show', $user);
     }
 
