@@ -10,6 +10,10 @@
     <li>{{ $user->name }}</li>
 @endsection
 
+@section('dropdown_settings')
+    <li><a href="{{route('backoffice.user.edit', $user)}}" class="grey-text text-darken-2">Editar Usuario</a></li>
+@endsection
+
 @section('content')
     
     <div class="section">
@@ -20,7 +24,9 @@
                 <div class="col s12 m8 ">
                     <div class="card">
                             <div class="card-content">   
-                                <span class="card-title">{{ $user->name }} </span>                                                          
+                                <span class="card-title">{{ $user->name }} </span>     
+                                <p><strong>Edad: </strong>{{ $user->age() }} </p> 
+                                                  {{-- age es una funcion de USER --}}                                                 
                             </div>
                             <div class="card-action">
                                 <a href="{{ route('backoffice.user.edit', $user) }}">Editar</a>

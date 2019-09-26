@@ -6,13 +6,14 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'dob', 'email', 'password',
     ];
 
    
@@ -20,7 +21,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-    
+    protected $dates = ['dob'];
+
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -37,14 +40,30 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
     //ALMACENAMIENTO
+        public function store ($request)
+        {
+            $user = self::create($request->all());
+            $user->update( ['password' =>  Hash::make($request->password) ] );
+            $roles =[$request->role];
+            $user->role_assigment(null, $roles);
+            toast('Usuario Creado!','success', 'top-right');
+            return $user;
+        }
 
-        public function role_assigment( $request)
-        {            
-            $this->permission_mass_assigment($request->roles);
-            $this->roles()->sync($request->roles);            
-            
-            $this->verify_permission_integrity($request->roles); /* USER: Quita los permisos de Roles No asignados */
+        public function role_assigment( $request, array $roles = null)
+        {   
+            $roles =(is_null($roles)) ? $request->roles : $roles;         
+            $this->permission_mass_assigment($roles);
+            $this->roles()->sync($roles);                        
+            $this->verify_permission_integrity($roles); /* USER: Quita los permisos de Roles No asignados */
             toast('Roles Asignados!','success', 'top-right');
+        }
+
+        public function my_update($request)
+        {
+            self::update( $request->all() );
+            toast('Usuario Actualizado!','success', 'top-right');
+
         }
         
     //VALIDACION
@@ -77,6 +96,19 @@ class User extends Authenticatable implements MustVerifyEmail
 
         
     //RECUPERACION DE INFORMACION
+        public function age()
+        {
+            if(!is_null($this->dob) )
+            {
+                $age = $this->dob->age;
+                $years = ($age == 1 ) ? 'año' : 'años';
+                $msj = $age . ' ' . $years;
+            }else{
+                $msj = 'indefinido';
+            }
+            return $msj;
+        }        
+
 
     //OTRAS OPERACIONES
                 //REtira los PErsmios si el Rol No esta asignado al Usuario

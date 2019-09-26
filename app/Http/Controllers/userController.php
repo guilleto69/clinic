@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -18,12 +21,16 @@ class userController extends Controller
 
     public function create()
     {
-        //
+        return view('theme.backoffice.pages.user.create',
+            ['roles' => Role::all(),
+            ]
+        );
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request, User $user)
     {
-        //
+       $user-> store($request);
+       return redirect()->route('backoffice.user.show', $user);
     }
 
     public function show(User $user)
@@ -33,19 +40,24 @@ class userController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('theme.backoffice.pages.user.edit',[
+            'user' => $user,
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, User $user)
     {
-        //
+       $user->my_update($request);
+       return redirect()->route('backoffice.user.show', $user);
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        toast('Usuario Borrado!','success', 'top-right');
+        return redirect()->route('backoffice.user.index');
     }
     
     // Mostrar formulario para asignar Rol
