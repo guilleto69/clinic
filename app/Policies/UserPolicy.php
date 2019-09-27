@@ -3,12 +3,16 @@
 namespace App\Policies;
 
 use App\User;
-use App\user;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class userPolicy
 {
     use HandlesAuthorization;
+
+    public function index(User $user)
+    {
+        return $user->has_permission('index-user');
+    }
 
     /**
      * Determine whether the user can view any models.
@@ -28,9 +32,9 @@ class userPolicy
      * @param  \App\user  $model
      * @return mixed
      */
-    public function view(User $user, user $model)
+      public function view(User $user, User $model)
     {
-        //
+        return $user->has_permission('view-user');
     }
 
     /**
@@ -41,7 +45,7 @@ class userPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->has_permission('create-user');
     }
 
     /**
@@ -51,9 +55,9 @@ class userPolicy
      * @param  \App\user  $model
      * @return mixed
      */
-    public function update(User $user, user $model)
+    public function update(User $user, User $model)
     {
-        //
+        return $user->has_permission('update-user');
     }
 
     /**
@@ -63,9 +67,9 @@ class userPolicy
      * @param  \App\user  $model
      * @return mixed
      */
-    public function delete(User $user, user $model)
+    public function delete(User $user, User $model)
     {
-        //
+        return $user->has_permission('delete-user');
     }
 
     /**
@@ -90,5 +94,20 @@ class userPolicy
     public function forceDelete(User $user, user $model)
     {
         //
+    }
+
+    public function assign_role(User $user)
+    {
+        return $user->has_permission('assign-role-user');
+    }
+
+    public function assign_permission(User $user)
+    {
+        return $user->has_permission('assign-permission-user');
+    }
+
+    public function import(User $user)
+    {
+        return $user->has_permission('import-user');
     }
 }

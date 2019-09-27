@@ -12,8 +12,14 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('role:' . config('app.admin_role'));
+    }
+
     public function index()
-    {                
+    {     
+        $this->authorize('index',Role::class);           
         return view('theme.backoffice.pages.role.index', [
             'roles' => Role::all(),
         ]);
@@ -21,7 +27,8 @@ class RoleController extends Controller
 
     public function create()
     {
-       return view('theme.backoffice.pages.role.create');
+        $this->authorize('create',Role::class);
+        return view('theme.backoffice.pages.role.create');
     }
 
     public function store(StoreRequest $request, Role $role)
@@ -32,6 +39,7 @@ class RoleController extends Controller
  
     public function show(Role $role)
     {
+        $this->authorize('view',$role);
         return view('theme.backoffice.pages.role.show', [
             'role'=>  $role,
             'permissions' => $role->permissions
@@ -54,8 +62,9 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
+        $this->authorize('delete', $role);
         $role->delete();
-        alert('Exito!', 'Rol Eliminado','success')->showConfirmButton();
+        toast('Rol Eliminado!','success', 'top-right');       
         return redirect()->route('backoffice.role.index');
     }
 }

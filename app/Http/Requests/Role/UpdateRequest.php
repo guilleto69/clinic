@@ -27,4 +27,10 @@ class UpdateRequest extends FormRequest
             'description.unique'=>'la Descripcion es Requerida',
         ];
     }
+
+    public function authorize()
+    {
+        $role = $this->route('role');
+        return $this->user()->can('update', $role);
+    }
 }

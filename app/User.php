@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -83,6 +83,14 @@ class User extends Authenticatable implements MustVerifyEmail
             foreach($this->roles as $role){
                 if ($role->id == $id || $role->slug==$id) return true;
             }
+            return false;
+        }
+
+        public function has_any_role(array $roles)
+        {
+            foreach($roles as $role){
+                if($this->has_role($role)) return true;
+            }   
             return false;
         }
 

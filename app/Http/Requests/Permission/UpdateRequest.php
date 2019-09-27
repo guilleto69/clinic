@@ -8,7 +8,8 @@ class UpdateRequest extends FormRequest
 {
     public function authorize()
     {
-        return true;
+        $permission = $this->route('permission');
+        return $this->user()->can('update', $permission);
     }
 
     

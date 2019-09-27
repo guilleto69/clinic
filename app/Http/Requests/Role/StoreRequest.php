@@ -28,4 +28,9 @@ class StoreRequest extends FormRequest
             'description.unique'=>'la Descripcion es Requerida',
         ];
     }
+
+    public function authorize()
+    {
+        return $this->user()->can('create', Role::class);
+    }
 }

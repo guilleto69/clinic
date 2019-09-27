@@ -13,13 +13,19 @@ Route::get('home', function () {
 
  //Route::get('/home', 'HomeController@index')->name('home'); 
 
-
+Route::get('text', function(){
+    return 'Permiso concedido';
+})->middleware('role:administrador-paciente-cirujano');
 
 //backoffice
  Route::group(['middleware' => ['auth'], 'as' => 'backoffice.'], function () {
     //Route::get('role', 'RoleController@index')->name('role.index');
     Route::get('admin', 'AdminController@show')->name('admin.show');
-    Route::resource('user', 'UserController');    
+    Route::resource('user', 'UserController');
+
+    Route::get('user_import', 'UserController@import')->name('user.import');
+    Route::post('user_make_import', 'USerController@make_import')->name('user.make_import');
+
     Route::get('user/{user}/assign_role', 'UserController@assign_role')->name('user.assign_role');
     Route::post('user/{user}/role_assigment', 'UserController@role_assigment')->name('user.role_assigment');
     Route::get('user/{user}/assign_permission', 'UserController@assign_permission')->name('user.assign_permission');
