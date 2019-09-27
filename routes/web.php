@@ -35,3 +35,8 @@ Route::get('text', function(){
     Route::resource('permission', 'PermissionController');
     
 });
+
+Route::group([ 'as' => 'frontoffice'], function(){
+    Route::get('profile','UserController@profile')->name('user.profile');
+
+});

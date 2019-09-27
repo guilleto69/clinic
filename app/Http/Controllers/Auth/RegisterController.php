@@ -73,8 +73,10 @@ class RegisterController extends Controller
         $patient = config('app.patient_role');
         $role = Role::where('slug',$patient)->first();
         $permissions = $role->permissions;
+
         $user->roles()->attach($role);
         $user->permissions()->sync($permissions);
+
         return $user;
     }
 }

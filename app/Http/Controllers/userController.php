@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 
 class userController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
   
     public function index()
     {
@@ -120,6 +125,12 @@ class userController extends Controller
         Excel::import( new UsersImport, $request->file('excel') );
         return redirect()->route('backoffice.user.index');
         toast('Usuarios Importados!','success', 'top-right');
+    }
+
+    public function profile()
+    {
+
+        return view('theme.frontoffice.pages.user.profile');
     }
 
 }
