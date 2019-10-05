@@ -70,8 +70,12 @@
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.time.js')}}"></script>
     <script type="text/javascript">
         $('select').formSelect(); //inicializa Selector        
-        
+    
+//////////////////////////////////////////////////////////
+
         $(document).ready(function(){
+    
+
             $('.datepicker').datepicker({
                 i18n: {
                     cancel: 'Cancelar',
@@ -89,41 +93,30 @@
                         'Jueves', 'Viernes', 'Sabado'],                    
                 },
 
-                /* disableDayFn:function (date) {
-
-                    /* return date.getDay() == 0 ; 
-
-                    let disableListDate = [ new Date('2019,10,11').toDateString(),
-                                        new Date('2019,10,21').toDateString()
-                                    ];
-
-                    if(disableListDate.includes(date.toDateString())) {
-                        return true
-                    }else{
-                        return false
-                    }
-
-                }, */
-                
                 format: "dd/mm/yyyy",
+                
+                minDate: new Date(), // solo seleccionar a partir de HOY
                 showClearBtn:true,
-                /* disableWeekends: true, */ //deshabilita Fines de Semana Sab y Dom                                                               
-                 disableDayFn: function(date) { //OK
-                    return date.getDay() == 0 ; //Deshabilita dia 0, Domingo 
-                }, 
+                //disableWeekends: true,  //deshabilita Fines de Semana Sab y Dom  
 
-                //disable :[0, {from: [15/10/2019], to: [25/10/2019]} ], //NO funciona
+                disableDayFn:function (date) {
+                     
+                    let disableListDate = [ new Date('2019,10,08').toDateString(),
+                                            new Date('2019,10,11').toDateString(),
+                                            new Date('2019,10,21').toDateString()
+                                        ]; //Dias NO disponibles
 
-                /* events:[], */
+                    if ( disableListDate.includes(date.toDateString() ) 
+                        || date.getDay() == 0 ) { //Deshabilita dia 0, Domingo 
+                            return  true;}
+                    else{
+                        return  false;}
+                    
+                },
+                                                                                 
             });
         });
+//////////////////////////////////////////////////
 
-       
-            $('.timepicker').pickatime({ //PICKATIME
-                
-               disable :[ ], 
-            });
-               
-                            
     </script>
 @endsection
