@@ -129,8 +129,11 @@ class userController extends Controller
 
     public function profile()
     {
-
-        return view('theme.frontoffice.pages.user.profile');
+        $user = auth()->user();
+        return view('theme.frontoffice.pages.user.profile',
+        [
+           'user' => $user, 
+        ]);
     }
 
 }

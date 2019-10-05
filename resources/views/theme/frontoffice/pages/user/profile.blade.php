@@ -1,4 +1,7 @@
+
 @extends('theme.frontoffice.layouts.main')
+
+@section('title', 'Perfil de ' . $user->name) 
 
 @section('head')
 
@@ -8,14 +11,20 @@
 @section('content')
     <div class="container">
         <div class="row">
-            {{-- Menu Lateral --}}
-            <div class="col s12 m4 ">
-                <h1>Lateral</h1>
-            </div>
+            @include('theme.frontoffice.pages.user.patient.includes.nav')
 
             {{-- Seccion Principal --}}
             <div class="col s12 m8">
-               <h1> Principal</h1>
+               <div class="card">
+                    
+                    <div class="card-content">
+                        <span class="card-title">@yield('title')</span>
+                    <p><strong>Nombre: </strong> {{ $user->name }}</p>
+                        <p><strong>Edad: </strong> {{ $user->age() }}</p>
+                        <p><strong>Email: </strong>{{ $user->email }}</p>
+                        <p><strong>Miembro desde: </strong>{{ $user->created_at->diffForHumans() }}</p>
+                    </div>
+               </div>
             </div>
         </div>
     </div>

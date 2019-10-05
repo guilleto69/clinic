@@ -1,6 +1,6 @@
 @extends('theme.frontoffice.layouts.main')
 
-@section('title', '')    
+@section('title', 'Mis Citas')    
 
 @section('head')
 @endsection
