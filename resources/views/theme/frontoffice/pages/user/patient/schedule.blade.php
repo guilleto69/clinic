@@ -75,8 +75,7 @@
 
         $(document).ready(function(){
     
-
-            $('.datepicker').datepicker({
+            var input_date = $('.datepicker').datepicker({
                 i18n: {
                     cancel: 'Cancelar',
                     clear: 'Borrar ',
@@ -114,9 +113,21 @@
                     
                 },
                                                                                  
-            });
+            });  
+            var date_picker = input_date.datepicker('picker');          
         });
+
+        
 //////////////////////////////////////////////////
+        var input_time = $('.timepicker').pickatime({
+            interval: 20,
+            min: 1, //tiempo de traslado = 1 Interval
+        });
+        var time_picker = input_time.pickatime('picker');
+
+        time_picker.set('disable', [4
+        
+        ]);
 
     </script>
 @endsection

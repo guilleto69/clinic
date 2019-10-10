@@ -57,7 +57,8 @@ class userPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->has_permission('update-user');
+        
+        return ($user->has_permission('update-user') && $user->has_role(config('app.admin_role')) ) || $user->id == $model->id; //el usuario puede cambiar SUS datos Propios
     }
 
     /**
@@ -109,5 +110,10 @@ class userPolicy
     public function import(User $user)
     {
         return $user->has_permission('import-user');
+    }
+
+    public function update_password(User $user, User $model)
+    {
+        return $user->id == $model->id;
     }
 }

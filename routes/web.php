@@ -38,6 +38,13 @@ Route::get('text', function(){
 
 Route::group([ 'as' => 'frontoffice.'], function(){
     Route::get('profile','UserController@profile')->name('user.profile');
+    Route::get('profile/{user}/edit','UserController@edit')->name('user.edit');
+    Route::put('profile/{user}/update','UserController@update')->name('user.update');
+    Route::get('profile/edit_password','UserController@edit_password')->name('user.edit_password');
+    route::put('profile/change_password','UserController@change_password')->name('user.change_password');
+
     Route::get('patient/schedule','PatientController@schedule')->name('patient.schedule');
     Route::get('patient/appointments','PatientController@appointments')->name('patient.appointments');
+    Route::get('patient/prescriptions','PatientController@prescriptions')->name('patient.prescriptions');
+    Route::get('patient/invoices','PatientController@invoices')->name('patient.invoices');    
 });
