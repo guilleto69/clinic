@@ -3,7 +3,10 @@
 return [
 
     'admin_role' => env('ADMIN_ROLE',  'administrador'),
+    'secretary_role' => env('SECRETETARY_ROLE', 'secretario'),
+    'doctor_role' => env('DOTOR_ROLE', 'doctor'),
     'patient_role' => env('PATIENT_ROLE', 'paciente'),
+    
     /*
     |--------------------------------------------------------------------------
     | Application Name

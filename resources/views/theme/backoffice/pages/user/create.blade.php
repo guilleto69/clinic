@@ -31,8 +31,7 @@
                                                     -- Selecciona un Rol--
                                                 </option>
                                                 @foreach ($roles as $role)
-                                                    <option value="{{$role->id}}">{{$role->name}}</option>                                                                                                    
-                                                @endforeach
+                                                    <option value="{{$role->id}}">{{$role->name}}</option>                                                                  @endforeach
                                             </select>                                                                                                                           
                                             @if ($errors->has('role'))
                                                 <span class="invalid-feedback" role="alert">
@@ -104,7 +103,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    </form>
+                                </form>
                                 </div>                               
                             </div>
                         </div>

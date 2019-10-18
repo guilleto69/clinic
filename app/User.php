@@ -115,7 +115,35 @@ class User extends Authenticatable implements MustVerifyEmail
                 $msj = 'indefinido';
             }
             return $msj;
-        }        
+        }   
+        
+        public function visible_users()
+        {
+            if($this->has_role(config('app.admin_role')))
+                $users = self::all();
+            if($this->has_role( config('app.secretary_role'))) { 
+                // q= tabla PIVOTE 
+                $users = self::whereHas('roles', function($q){
+                        $q->whereIn('slug', [
+                                config('app.doctor_role'),
+                                config('app.patient_role'),                       
+                                ]
+                        );
+                    } 
+                )->get();               
+            }
+            if($this->has_role( config('app.doctor_role'))) {
+                // q= tabla PIVOTE 
+                $users = self::whereHas('roles', function($q){
+                    $q->whereIn('slug', [
+                            config('app.patient_role'),                            
+                        ]
+                    );
+                } 
+            )->get();
+            }
+            return $users;
+        }
 
 
     //OTRAS OPERACIONES
