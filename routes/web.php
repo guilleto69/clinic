@@ -23,6 +23,8 @@ Route::get('text', function(){
     Route::get('admin', 'AdminController@show')->name('admin.show');
     Route::resource('user', 'UserController');
 
+    Route::get('patient/{user}/schedule', 'PatientController@back_schedule')->name('patient.schedule');
+
     Route::get('user_import', 'UserController@import')->name('user.import');
     Route::post('user_make_import', 'USerController@make_import')->name('user.make_import');
 

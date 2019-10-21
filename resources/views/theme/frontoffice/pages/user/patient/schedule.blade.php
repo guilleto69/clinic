@@ -4,9 +4,9 @@
 @section('title', 'Agendar una Cita') 
 
 @section('head')
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontofficce/Plugins/Pickadate/themes/default.css')}}">
-{{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontofficce/Plugins/Pickadate/themes/default.date.css')}}"> --}}
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontofficce/Plugins/Pickadate/themes/default.time.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontofficce/Plugins/Pickadate/themes/default.css')}}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontofficce/Plugins/Pickadate/themes/default.date.css')}}"> --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontofficce/Plugins/Pickadate/themes/default.time.css')}}">
 @endsection
 
 
@@ -25,6 +25,18 @@
                             
                            <div class="row">
                                 <div class="input-field col s12">
+                                    <i class="material-icons prefix">local_hospital</i>
+                                    <select name="doctor" >
+                                        <option value="1">Internista</option>
+                                        <option value="2">Ortopedista</option>
+                                        <option value="3">Fisioterapeuta</option>
+                                    </select>
+                                    <label for="">Selecciona la Especialidad</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
                                     <i class="material-icons prefix">assignment_ind</i>
                                     <select name="doctor" >
                                         <option value="1">doc 1</option>
@@ -38,14 +50,15 @@
                             <div class="row">                                                        
                                 <div class="input-field col s12 m6">
                                     <i class="material-icons prefix">today</i>
-                                    <input id="datepicker" type="text" name="date" class="datepicker">
-                                    <label for="datepicker">Selecciona una Fecha</label>
+                                    <input id="datepicker" type="text" name="date" class="datepicker" placeholder="Selecciona una Fecha">
+                                    {{-- <label for="datepicker">Selecciona una Fecha</label> --}}
+                                    {{-- placeholder="Selecciona una Fecha" --}}
                                 </div>
                             
                                 <div class="input-field col s12 m6">
                                     <i class="material-icons prefix">access_time</i>
-                                    <input id="timepicker" type="text" name="time" class="timepicker">
-                                    <label for="timepicker">Selecciona una Hora</label>
+                                    <input id="timepicker" type="text" name="time" class="timepicker" placeholder="Selecciona una Hora">
+                                    {{-- <label for="timepicker">Selecciona una Hora</label> --}}
                                 </div> 
                             </div>
                         
@@ -66,7 +79,7 @@
 @section('foot')
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/legacy.js')}}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('assets/frotoffice/Plugins/Pickadate/picker.date.js')}}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.date.js')}}"></script> --}}
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.time.js')}}"></script>
     <script type="text/javascript">
         $('select').formSelect(); //inicializa Selector        
@@ -92,42 +105,41 @@
                         'Jueves', 'Viernes', 'Sabado'],                    
                 },
 
-                format: "dd/mm/yyyy",
+                format: 'Has Seleccionado: dddd, dd mmm, yyyy',
+                formatSubmit: 'yyyy/mm/dd',
+                hiddenPrefix: 'prefix__',
+                hiddenSuffix: '__suffix',
                 
-                minDate: new Date(), // solo seleccionar a partir de HOY
-                showClearBtn:true,
-                //disableWeekends: true,  //deshabilita Fines de Semana Sab y Dom  
 
-                disableDayFn:function (date) {
-                     
-                    let disableListDate = [ new Date('2019,10,08').toDateString(),
-                                            new Date('2019,10,11').toDateString(),
-                                            new Date('2019,10,21').toDateString()
-                                        ]; //Dias NO disponibles
-
-                    if ( disableListDate.includes(date.toDateString() ) 
-                        || date.getDay() == 0 ) { //Deshabilita dia 0, Domingo 
-                            return  true;}
-                    else{
-                        return  false;}
-                    
-                },
+                }, 
                                                                                  
             });  
             var date_picker = input_date.datepicker('picker');          
         });
-
+///////////////////////////////////////////////////////////////
         
+$(document).ready(  function(){
+    
+    var input_rime = $('.timepicker').pickatime({
+        min: [7,30],
+        max: [14,0]
+    })
+
+    }, 
+);  
+    var time_picker = input_time.datepicker('picker');          
+    }
+);
 //////////////////////////////////////////////////
-        var input_time = $('.timepicker').pickatime({
-            interval: 20,
-            min: 1, //tiempo de traslado = 1 Interval
+        /* var input_time = $('.timepicker').pickatime({
+            min: [7,0],
+            max: [14,0],
+            //interval: 20,
+            //min: 1, //tiempo de traslado = 1 Interval
         });
-        var time_picker = input_time.pickatime('picker');
+        var time_picker = input_time.pickatime('picker'); */
 
-        time_picker.set('disable', [4
-        
-        ]);
+        //time_picker.set('disable', [4]);
 
     </script>
 @endsection
