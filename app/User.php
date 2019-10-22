@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
+use App\Http\Requests\User\UpdateRequest;
 use App\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash; 
@@ -148,7 +149,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         public function visible_roles(){
             if($this->has_role(config('app.admin_role'))) $roles = Role::all();
-            if($this->has_role(config('app.secretary_role'))){
+            if($this->has_any_role([config('app.secretary_role'),config('app.doctor_role')])){
                 $roles = Role::where('slug', config('app.patient_role'))
                 /* ->orWhere('slug', config('app.doctor_role')) */
                 ->get();

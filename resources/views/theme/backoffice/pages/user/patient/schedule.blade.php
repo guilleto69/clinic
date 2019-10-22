@@ -33,29 +33,34 @@
                          <form action="#" method="POST">
                              @csrf
                              
-                            <div class="row">
-                                 <div class="input-field col s12">
-                                     <i class="material-icons prefix">local_hospital</i>
-                                     <select name="doctor" >
-                                         <option value="1">Internista 2</option>
-                                         <option value="2">Ortopedista</option>
-                                         <option value="3">Fisioterapeuta</option>
-                                     </select>
-                                     <label for="">Selecciona la Especialidad</label>
-                                 </div>
-                             </div>
- 
-                             <div class="row">
-                                 <div class="input-field col s12">
-                                     <i class="material-icons prefix">assignment_ind</i>
-                                     <select name="doctor" >
-                                         <option value="1">doc 1</option>
-                                         <option value="2">doc 2</option>
-                                         <option value="3">doc 3</option>
-                                     </select>
-                                     <label for="">Selecciona al Doctor</label>
-                                 </div>
-                             </div>
+                             @if(Auth::user()->has_role(config('app.doctor_role')))
+                                <input   type="hidden" name="speciality" value="">            <input   type="hidden" name="doctor" value="{{ Auth::id()}}">          
+                                
+                            @else
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">local_hospital</i>
+                                        <select name="speciality" >
+                                            <option value="1">Internista 2</option>
+                                            <option value="2">Ortopedista</option>
+                                            <option value="3">Fisioterapeuta</option>
+                                        </select>
+                                        <label for="">Selecciona la Especialidad</label>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <i class="material-icons prefix">assignment_ind</i>
+                                        <select name="doctor" >
+                                            <option value="1">doc 1</option>
+                                            <option value="2">doc 2</option>
+                                            <option value="3">doc 3</option>
+                                        </select>
+                                        <label for="">Selecciona al Doctor</label>
+                                    </div>
+                                </div>
+                            @endif
  
                              <div class="row">                                                        
                                  <div class="input-field col s12 m6" position= "relative">
