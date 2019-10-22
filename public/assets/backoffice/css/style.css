@@ -6955,7 +6955,7 @@ ul.side-nav .collapsible-header.active:after {
 Cards
 ------------------------------------------*/
 .card {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #card-stats .card-content {

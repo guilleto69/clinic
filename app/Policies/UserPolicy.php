@@ -57,8 +57,22 @@ class userPolicy
      */
     public function update(User $user, User $model)
     {
-        
-        return ($user->has_permission('update-user') && $user->has_role(config('app.admin_role')) ) || $user->id == $model->id; //el usuario puede cambiar SUS datos Propios
+        if($user->id == $model->id){
+            return true;
+        }
+
+        if($user->has_permission('update-user')){
+            if($user->has_role( config('app.admin_role')) ){
+                return true;
+            }
+
+            if ($user->has_role( config('app.secretary_role')) && 
+                    $model->has_role( config('app.patient_role'))){
+                return true;
+            }
+        }
+        return false;
+      
     }
 
     /**

@@ -187,7 +187,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         if ( !is_null($view) && $view == 'frontoffice') {
             return 'theme.frontoffice.pages.user.edit';
-        }else if($auth->has_role( config('app.admin_role') )){
+        }else if($auth->has_any_role( [config('app.admin_role'), config('app.secretary_role') ])){
             return 'theme.backoffice.pages.user.edit';
         }else{
             return 'theme.frontoffice.pages.user.edit';
@@ -200,7 +200,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         if ( !is_null($view) && $view == 'frontoffice') {
             return 'frontoffice.user.profile';
-        }else if($auth->has_role( config('app.admin_role') )){
+        }else if($auth->has_any_role( [config('app.admin_role'), config('app.secretary_role') ] )){
             return 'backoffice.user.show';
         }else{
             return 'frontoffice.user.profile';

@@ -83,63 +83,40 @@
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.time.js')}}"></script>
     <script type="text/javascript">
         $('select').formSelect(); //inicializa Selector        
-    
-//////////////////////////////////////////////////////////
+    </script>
+{{-- ////////////////////////////////////////////////////////// --}}
+<script>
+        var input_date= $('.datepicker').pickadate({
+            min: true, //Des Habilita Fechas Pasadas
+            monthsFull: ['Enero', 'Febrero', 'Marz', 'Abril', 'Mayo', 'Junio', 'Julio',
+            'Augosto', 'Septimbre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+            weekdaysShort: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+            
+            format: 'mmm d, yyyy',
 
-        $(document).ready(function(){
-    
-            var input_date = $('.datepicker').datepicker({
-                i18n: {
-                    cancel: 'Cancelar',
-                    clear: 'Borrar ',
-                    done: 'Continuar',
-                    months: ['Enero', 'Febrero', 'Marzo', 'Abril',
-                        'Mayo', 'Junio', 'Julio', 'Agosto', 
-                        'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],                                        
-                    monthsShort: ['Ene', 'Feb', 'Mar', 'Abr','May', 'Jun', 
-                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                    
-                    weekdaysAbbrev: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],                    
-                    weekdaysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-                    weekdays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 
-                        'Jueves', 'Viernes', 'Sabado'],                    
-                },
+            today: 'Hoy',
+            clear: 'Borrar',
+            close: 'Cerrar',
 
-                format: 'Has Seleccionado: dddd, dd mmm, yyyy',
-                formatSubmit: 'yyyy/mm/dd',
-                hiddenPrefix: 'prefix__',
-                hiddenSuffix: '__suffix',
-                
+            disable: [1 ],
 
-                }, 
-                                                                                 
-            });  
-            var date_picker = input_date.datepicker('picker');          
+            labelMonthNext: 'SIGIENTE Mes',
+            labelMonthPrev: 'Mes ANTERIOR',
         });
-///////////////////////////////////////////////////////////////
-        
-$(document).ready(  function(){
-    
-    var input_rime = $('.timepicker').pickatime({
-        min: [7,30],
-        max: [14,0]
-    })
 
-    }, 
-);  
-    var time_picker = input_time.datepicker('picker');          
-    }
-);
-//////////////////////////////////////////////////
-        /* var input_time = $('.timepicker').pickatime({
+        var date_picker = input_date.pickadate('picker');       
+      
+    {{-- ////////////////////////////////////////////////// --}}
+    
+        var input_time = $('.timepicker').pickatime({
             min: [7,0],
-            max: [14,0],
-            //interval: 20,
+            max: [18,0],
+            interval: 15,
             //min: 1, //tiempo de traslado = 1 Interval
         });
-        var time_picker = input_time.pickatime('picker'); */
 
-        //time_picker.set('disable', [4]);
-
+        var time_picker = input_time.pickatime('picker');
+        
     </script>
 @endsection
