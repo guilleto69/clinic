@@ -84,6 +84,34 @@
     <script type="text/javascript">
         $('select').formSelect(); //inicializa Selector        
     </script>
+
+<script>
+    function enviar_formulario()
+    {
+        /* document.delete_form.submit(); */            
+        swal.fire({
+            title:"¿Deseas Eliminar esta Cita?",
+            text:"Esta accion NO se puedes deshacer",
+            type:"warning",
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Si, continuar",
+            cancelButtonText: "No, Cancelar",
+            closeOnCancel: false,
+            closeOnConfirm: true               
+        }).then( (result) =>
+                    {                    
+                    if(result.value){
+                            document.delete_form.submit();
+                        } else{
+                            swal.fire('Operacion Cancelada',
+                                'Registro No eliminado',
+                                'error')  
+                        }
+                    }
+                );
+    }
+</script> 
 {{-- ////////////////////////////////////////////////////////// --}}
 <script>
         var input_date= $('.datepicker').pickadate({
