@@ -108,6 +108,14 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;            
         }
 
+        public function has_speciality($id){
+            foreach($this->specialities as $speciality ){
+                if($speciality->id == $id) return true;                
+            }
+            return false;
+        }
+
+
         
     //RECUPERACION DE INFORMACION
         public function age()
@@ -125,9 +133,10 @@ class User extends Authenticatable implements MustVerifyEmail
         
         public function visible_users()
         {
-            if($this->has_role(config('app.admin_role')))
+            if($this->has_role(config('app.admin_role'))){
                 $users = self::all();
-            if($this->has_role( config('app.secretary_role'))) { 
+            }
+            elseif($this->has_role( config('app.secretary_role'))) { 
                 // q= tabla PIVOTE 
                 $users = self::whereHas('roles', function($q){
                         $q->whereIn('slug', [
@@ -138,7 +147,7 @@ class User extends Authenticatable implements MustVerifyEmail
                     } 
                 )->get();               
             }
-            if($this->has_role( config('app.doctor_role'))) {
+            elseif($this->has_role( config('app.doctor_role'))) {
                 // q= tabla PIVOTE 
                 $users = self::whereHas('roles', function($q){
                     $q->whereIn('slug', [
@@ -161,7 +170,17 @@ class User extends Authenticatable implements MustVerifyEmail
             return $roles;
         }
         
+        public function list_roles(){
+            $roles = $this->roles->pluck('name')->toArray();
+            $string = implode(', ', $roles);
+            return $string;
+        }
 
+        public function list_specialities(){
+            $specialities = $this->specialities->pluck('name')->toArray();
+            $string = implode(', ', $specialities);
+            return $string;
+        }
 
     //OTRAS OPERACIONES
                 //REtira los PErsmios si el Rol No esta asignado al Usuario

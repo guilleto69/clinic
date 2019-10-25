@@ -1,6 +1,6 @@
 @extends('theme.backoffice.layouts.admin')
 
-@section('title', 'Asignar Permisos')
+@section('title', 'Asignar Especialidades')
 
 @section('head')
 
@@ -9,41 +9,41 @@
 @section('breadcumbs')
     <li><a href="{{ route('backoffice.user.index')}}" >Usuarios del Sistema</a></li>
 <li><a href="{{ route('backoffice.user.show',$user)}}" >{{ $user->name }}</a></li>
-    <li>Asignar Permisos></li>
+<li><a href="" class="active"></a>Asignar Especialidades></li>    
+
 @endsection
 
 @section('content')
     <div class="section">
-         <p class="caption">Selecciona los Permisos que desas asignar</p>
+         <p class="caption">Selecciona las Especialidades que desas asignar</p>
          <div class="divider"></div>
         <div class="section">
             <div class="row">
                 <div class="col s12 m8 ">
                     <div class="card">
                         <div class="card-content">
-                            <h4 class="card_title">Asignar Permisos</h4>
+                            <h4 class="card_title">Asignar Especialidades</h4>
                                 <div class="row">
-                                <form class="col s12" method="post" 
-                                    action="{{ route('backoffice.user.permission_assignment', $user)}}">
+                                <form class="col s12" method="post" action="{{ route('backoffice.user.speciality_assignment', $user)}}">
                                     @csrf
-
-                                   {{-- Aqui se van a msotrar los Perrmisos--}}
-                                   @foreach ($roles as $role)
-                                        <p>{{$role->name}}</p>
-                                        @foreach ($role->permissions as $permission)
-                                            <p>
-                                                <input type="checkbox" id="{{ $permission->id}}" 
-                                                    name="permissions[]" value="{{ $permission->id}}"
-                                                    @if($user->has_permission($permission->id)) checked 
-                                                    @endif
-                                                >
-                                                <label for="{{ $permission->id}}">
-                                                    <span>{{ $permission->name}}</span>
-                                                </label>
-                                            </p>
-                                        @endforeach
-                                   @endforeach
-                                                            
+                                    
+                                    @foreach ($specialities as $speciality)
+                                        <p>
+                                          <input 
+                                            type="checkbox" 
+                                            id="{{ $speciality->id }}" 
+                                            name="specialities[]" 
+                                            value="{{ $speciality->id }}"  
+                                            @if( $user->has_speciality($speciality->id) ) 
+                                              checked 
+                                            @endif
+                                          />
+                                            <label for="{{ $speciality->id }}">                  
+                                                  <span>{{ $speciality->name }}</span>
+                                            </label>
+                                        </p>
+                                    @endforeach
+                                                                                                        
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <button class="btn waves-effect waves-light right" type="submit" >Guardar
@@ -63,7 +63,9 @@
                 </div>
             </div>
         </div>                    
-       
+    
+                    
+    
 @endsection
 
 @section('foot')

@@ -19,8 +19,7 @@
 @endsection
 
 @section('content')
-    
-    <div class="section">
+      <div class="section">
         <p class="caption"><strong>Usuario: </strong>{{ $user->name }}</p>
         <div class="divider"></div>
         <div id="basic-form" class="section">
@@ -62,8 +61,7 @@
                                 </div>
                             @endif
  
-                             <div class="row">                                                        
-                                 <div class="input-field col s12 m6" position= "relative">
+                             <div class="row">                                         <div class="input-field col s12 m6" position= "relative">
                                      <i class="material-icons prefix">today</i>
                                      <input id="datepicker" type="text" name="date" 
                                         class="datepicker" placeholder="Selecciona una Fecha" >
@@ -128,7 +126,7 @@
 
         var date_picker = input_date.pickadate('picker');       
       
-    {{-- ////////////////////////////////////////////////// --}}
+     ////////////////////////////////////////////////// --}}
     
         var input_time = $('.timepicker').pickatime({
             min: [7,0],

@@ -26,7 +26,15 @@
                             <div class="card-content">   
                                 <span class="card-title">{{ $user->name }} </span>     
                                 <p><strong>Edad: </strong>{{ $user->age() }} </p> 
-                                                  {{-- age es una funcion de USER --}}                                                 
+                                                  {{-- age es una funcion de USER --}}       
+                                <p><strong>Roles: </strong>{{ $user->list_roles() }}</p> 
+                                @if ($user->has_role(config('app.doctor_role')))
+                                <p>Especialidades: <strong>{{ $user->list_specialities() }}
+                                    </strong>
+                                </p> 
+                                @endif
+
+                                                                      
                             </div>
                             <div class="card-action">
                                 <a href="{{ route('backoffice.user.edit', $user) }}">Editar</a>

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 
 Auth::routes(['verify' => true]);
 
@@ -49,8 +50,12 @@ Route::get('text', function(){
         ->name('user.permission_assignment');
 
     Route::resource('speciality','SpecialityController');
-    
-    
+    Route::get('user/{user}/assign_speciality', 'UserController@assign_speciality')
+        ->name('user.assign_speciality');
+    Route::post('user/{user}speciality_assignment',
+      'UserController@speciality_assignment')
+        ->name('user.speciality_assignment');
+       
 });
 
 Route::group([ 'as' => 'frontoffice.'], function(){
@@ -73,4 +78,9 @@ Route::group([ 'as' => 'frontoffice.'], function(){
         ->name('patient.prescriptions');
     Route::get('patient/invoices','PatientController@invoices')
         ->name('patient.invoices');    
+});
+
+Route::group(['middleware' => ['auth'], 'as' => 'ajax.'], function(){
+    Route::get('user_speciality','AjaxController@user_speciality')
+    ->name('user_speciality');
 });

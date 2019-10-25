@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Speciality;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -115,6 +116,21 @@ class userController extends Controller
         return redirect()->route('backoffice.user.show', $user);
     }
 
+    //Mostrar formulario para asignar Especialidades Medicas
+
+    public function assign_speciality(User $user){
+        return view('theme.backoffice.pages.user.assign_speciality',[
+            'user' => $user,
+            'specialities' => Speciality::all()
+        ]);
+    } 
+    
+    Public function speciality_assignment(Request $request, User $user){
+        $user->specialities()->sync($request->specialities);
+        toast('Especialidades Asignadas!','success', 'top-right');
+        return redirect()->route('backoffice.user.show', $user);
+    }
+
     //metodo de mostrar formulario para importar usuarios
     public function import( )
     {
@@ -136,7 +152,7 @@ class userController extends Controller
         $user = auth()->user();
         return view('theme.frontoffice.pages.user.profile',
         [
-           'user' => $user, 
+           'user' => $user
         ]);
     }
 
