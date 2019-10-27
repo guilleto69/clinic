@@ -4,12 +4,14 @@
     <title> @yield('title')</title>
     @include('theme.backoffice.layouts.includes.head')
   </head>
+  
   <body>
-      @include('theme.backoffice.layouts.includes.loader')    
+      @include('theme.backoffice.layouts.includes.loader')  
+        
       @include('theme.backoffice.layouts.includes.header')
       <div id="main">
       <div class="wrapper">       
-          @include('theme.backoffice.layouts.includes.left-sidebar')                  
+                            
           <section id="content">
             @include('theme.backoffice.layouts.includes.breadcumbs')
             <div class="container">

@@ -1,3 +1,4 @@
+{{ dd($appointments) }}
 @extends('theme.frontoffice.layouts.main')
 
 @section('title', 'Mis Citas')    

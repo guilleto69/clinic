@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Appointment;
+use App\Invoice;
 use App\User;
 use Illuminate\Http\Request;
+
 
 
 class PatientController extends Controller
@@ -14,14 +17,24 @@ class PatientController extends Controller
         ]);
     }
 
+    public function store_schedule(Request $request, Appointment $appointment, Invoice $invoice){
+
+        $invoice = $invoice->store($request);
+        $appointment = $appointment->store($request, $invoice);
+        toast('Cita Creada!','success', 'top-right');
+        return redirect()->route('frontoffice.patient.appointments');
+    }
+
     public function back_schedule(User $user){
         return view('theme.backoffice.pages.user.patient.schedule',[
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
     public function appointments(){
-        return view ('theme.frontoffice.pages.user.patient.appointments');
+        return view ('theme.frontoffice.pages.user.patient.appointments',[
+            'appointments' => user()->appointments
+        ]);
     }
 
     public function back_appointments(User $user){

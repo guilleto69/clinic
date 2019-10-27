@@ -16,7 +16,7 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->Increments('id');
             $table->float('amount',8,2);
-            $table->enum('satus',['pending','approved','rejected','cancelled','refunded'])->default('pending');
+            $table->enum('status',['pending','approved','rejected','cancelled','refunded'])->default('pending');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')
             ->on('users')->onUpdate('cascade')->onDelete('cascade');

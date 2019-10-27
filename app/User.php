@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use App\Http\Requests\User\UpdateRequest;
 use App\Role;
+use App\Appointment;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash; 
 
@@ -43,6 +44,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
         public function specialities(){
             return $this->belongsToMany('App\Speciality')->withTimestamps();
+        }
+
+        public function invoices(){
+            return $this->hasMany('App\Invoice');
+        }
+
+        public function appointments(){
+            return $this->hasMany('App\Appointment');
         }
 
     //ALMACENAMIENTO

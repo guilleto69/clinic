@@ -61,18 +61,18 @@
                                 </div>
                             @endif
  
-                             <div class="row">                                         <div class="input-field col s12 m6" position= "relative">
+                             <div class="row">                                         
+                                 <div class="input-field col s12 m6" position= "relative">
                                      <i class="material-icons prefix">today</i>
                                      <input id="datepicker" type="text" name="date" 
                                         class="datepicker" placeholder="Selecciona una Fecha" >
-                                     {{-- <label for="datepicker">Selecciona una Fecha</label> --}}                           
+                          
                                 </div>
                              
                                  <div class="input-field col s12 m6" position= "relative">
                                      <i class="material-icons prefix">access_time</i>
                                      <input id="timepicker" type="text" name="time" 
-                                        class="timepicker" placeholder="Selecciona una Hora">
-                                     {{-- <label for="timepicker">Selecciona una Hora</label> --}}
+                                        class="timepicker" placeholder="Selecciona una Hora">                                     
                                  </div> 
                              </div>
                          
@@ -87,7 +87,7 @@
              </div>
 
                 <div class="col s12 m4 ">
-                    {{-- Barra navegacion Derecha --}}
+                    {{-- Barra navegacion Izquierda --}}
                     @include('theme.backoffice.pages.user.includes.user_nav')
                 </div>                 
             </div>                                        
@@ -119,6 +119,9 @@
             close: 'Cerrar',
 
             disable: [1 ],
+            disable: [
+                    [2019,9,30]
+                ],
 
             labelMonthNext: 'SIGIENTE Mes',
             labelMonthPrev: 'Mes ANTERIOR',
@@ -131,7 +134,11 @@
         var input_time = $('.timepicker').pickatime({
             min: [7,0],
             max: [18,0],
-            interval: 15,
+            interval: 30,
+            disable:[
+                    { from: [14,0], to: [15,30]},
+                    [10,0],
+                ],
             //min: 1, //tiempo de traslado = 1 Interval
         });
 
