@@ -84,4 +84,7 @@ Route::group([ 'as' => 'frontoffice.'], function(){
 Route::group(['middleware' => ['auth'], 'as' => 'ajax.'], function(){
     Route::get('user_speciality','AjaxController@user_speciality')
     ->name('user_speciality');
+    Route::get('invoice_info', 'AjaxController@invoice_info')
+    ->name('invoice_info');
+    
 });

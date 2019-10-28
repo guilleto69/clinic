@@ -33,7 +33,7 @@ class PatientController extends Controller
 
     public function appointments(){
         return view ('theme.frontoffice.pages.user.patient.appointments',[
-            'appointments' => user()->appointments
+            'appointments' => user()->appointments->sortBy('date'),
         ]);
     }
 
@@ -48,7 +48,9 @@ class PatientController extends Controller
     }
 
     public function invoices(){
-        return view ('theme.frontoffice.pages.user.patient.invoices');
+        return view ('theme.frontoffice.pages.user.patient.invoices', [
+           'invoices' => user()->invoices,
+        ]);
     }
 
     public function back_invoices(User $user){

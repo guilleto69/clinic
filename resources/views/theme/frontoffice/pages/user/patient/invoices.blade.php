@@ -23,17 +23,33 @@
                         <thead>
                              <th>id</th>
                              <th>Concepto</th>
+                             {{-- <th>Doctor</th> --}}
                              <th>Monto</th>
                              <th>Estado</th>
                              <th>Accion</th>   
                         </thead>
                         <tbody>
-                            <td>1 </td>
-                            <td>Consulta con Dr. Guille</td>
-                            <td>150000 COP$</td>
-                            <td>Pendiente Pago</td>
-                            <td><a href="#modal" data-prescription="1" class="modal-trigger">
-                                Ver</a> </td>
+                            @forelse ($invoices as $key => $invoice)
+                                <tr>
+                                    <td>{{ $invoice->id }}</td>
+                                    <td>{{ $invoice->concept() }}</td>
+                                    {{-- <td>{{ $invoice->doctor()->name }}</td> --}}
+                                    <td>{{ $invoice->amount }}</td>
+                                    <td>{{ $invoice->status }}</td>
+                                <td><a href="#modal" 
+                                        data-invoice= "{{ $invoice->id }}" 
+                                        onClick= "modal_invoice(this)" class="modal-trigger">
+                                    Ver
+                                    </a>
+                                    </td>
+
+                                    
+                                </tr>                                
+                            @empty
+                                <tr>
+                                    <td colspan="5"> No tienes Registrada ninguna Factura.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -42,8 +58,11 @@
     </div>
     <div class="modal" id="modal">
         <div class="modal-content">
-            <h4>Factura 1</h4>
-            <p>Mucho Amor</p>
+            <h4 id="modal_invoice_title">Informacion de la Factura</h4>
+            <p><strong>Folio: </strong> <span id="modal_invoice_id"></span></p>
+            <p><strong>Doctor: </strong> <span id="modal_invoice_doctor"></span></p>
+            <p><strong>Concepto: </strong> <span id="modal_invoice_concept"></span></p>
+            <p><strong>Monto: </strong> <span id="modal_invoice_amount"></span></p>
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-close waves-effect btn-flat">Cerrar</a>
@@ -56,5 +75,25 @@
 @section('foot')
     <script type="text/javascript">
         $('.modal').modal(); /* Inicializa Clase & Metodo */
+
+        function modal_invoice(e)
+        {
+            var invoice_id = $(e).data('invoice');
+            $.ajax({
+                url: "{{ route('ajax.invoice_info') }}",
+                method: 'GET',
+                data: {
+                    invoice_id: invoice_id,
+                },
+                success: function (data){
+                    console.log(data);
+                    $('#modal_invoice_id').html(data.invoice.id);
+                    $('#modal_invoice_doctor').html(data.doctor.name);
+                    $('#modal_invoice_concept').html(data.concept);
+                    $('#modal_invoice_amount').html(data.invoice.amount);
+                   
+                }
+            });            
+        }
     </script>
 @endsection

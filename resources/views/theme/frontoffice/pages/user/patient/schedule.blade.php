@@ -30,13 +30,13 @@
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">local_hospital</i>
                                         <select id="speciality" name="doctor" >
-                                            <option disabled="" selected="">-- Selecciona una Especialidad --</option>
+                                            <option disabled="" selected="">            --    Selecciona una Especialidad --</option>
                                             @foreach ($specialities as $speciality)
                                                 <option value="{{ $speciality->id}}">
                                                     {{ $speciality->name}}</option>
                                             @endforeach
                                         </select>
-                                        <label for="">Selecciona la Especialidad</label>
+                                        <label for="">                 Selecciona la Especialidad</label>
                                     </div>
                                 </div>
 
@@ -44,7 +44,7 @@
                                     <div class="input-field col s12">
                                         <i class="material-icons prefix">assignment_ind</i>
                                         <select id="doctor" name="doctor" >
-                                                <option disabled="" selected="">-- Selecciona una Especialidad Primero --</option>
+                                                <option disabled="" selected="">          --    Selecciona una Especialidad Primero --</option>
                                             
                                         </select>
                                         <label for="">Selecciona al Doctor</label>
@@ -173,7 +173,7 @@
                     doctor.append('<option disabled= "selected">-- Selecciona un Medico --</option>');
 
                     $.each(data, function(index,element){
-                        doctor.append('<option value="  ' +element.id + '">        '+ element.name + '</option>')
+                        doctor.append('<option value="  ' +element.id + '">            '+ element.name + '</option>')
                     });
                     doctor.formSelect();
                 }

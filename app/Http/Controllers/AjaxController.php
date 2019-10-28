@@ -15,4 +15,16 @@ class AjaxController extends Controller
             return response()->json($users);
         }
     }
+
+    public function invoice_info(Request $request)
+    {
+        if($request->ajax() ){
+            $invoice = \App\Invoice::findOrFail($request->invoice_id);
+            return response()->json([
+                        'invoice' => $invoice,
+                        'doctor' => $invoice->doctor('No Aplica'),
+                        'concept' => $invoice->concept(),
+            ]);
+        }
+    }
 }

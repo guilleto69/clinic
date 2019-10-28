@@ -1,4 +1,4 @@
-{{ dd($appointments) }}
+
 @extends('theme.frontoffice.layouts.main')
 
 @section('title', 'Mis Citas')    
@@ -26,17 +26,25 @@
                                 <th>id</th>
                                 <th>Especialista</th>
                                 <th>Fecha</th>
-                                <th>Hora</th>
                                 <th>Estado</th> {{-- Finalizado, Pendiente, Pagado... --}}
                             </tr>
                         </thead>
 
                         <tbody>
-                            <td>1</td>
-                            <td>Guille</td>
-                            <td>10 de Oct 2019</td>
-                            <td>15:30</td>
-                            <td>Pendiente</td>                            
+                            @forelse($appointments as $appointment)
+                                <tr>
+                                    <td>{{ $appointment->id}}</td>
+                                    <td>{{ $appointment->doctor()->name}}</td>
+                                    <td>{{ $appointment->date->format('d/m/Y H:i')}}</td>
+                                    <td>{{ $appointment->status}}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan ="4"> No hay citas Registradas</td>
+                                </tr>
+
+                            @endforelse
+                            
                         </tbody>
                     </table>
                 
