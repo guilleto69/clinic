@@ -29,59 +29,11 @@
                 <div class="card">                    
                      <div class="card-content">
                          <span class="card-title">@yield('title')</span>
-                         <form action="#" method="POST">
-                             @csrf
-                             
-                             @if(Auth::user()->has_role(config('app.doctor_role')))
-                                <input   type="hidden" name="speciality" value="">            <input   type="hidden" name="doctor" value="{{ Auth::id()}}">          
-                                
-                            @else
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">local_hospital</i>
-                                        <select name="speciality" >
-                                            <option value="1">Internista 2</option>
-                                            <option value="2">Ortopedista</option>
-                                            <option value="3">Fisioterapeuta</option>
-                                        </select>
-                                        <label for="">Selecciona la Especialidad</label>
-                                    </div>
-                                </div>
-    
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <i class="material-icons prefix">assignment_ind</i>
-                                        <select name="doctor" >
-                                            <option value="1">doc 1</option>
-                                            <option value="2">doc 2</option>
-                                            <option value="3">doc 3</option>
-                                        </select>
-                                        <label for="">Selecciona al Doctor</label>
-                                    </div>
-                                </div>
-                            @endif
- 
-                             <div class="row">                                         
-                                 <div class="input-field col s12 m6" position= "relative">
-                                     <i class="material-icons prefix">today</i>
-                                     <input id="datepicker" type="text" name="date" 
-                                        class="datepicker" placeholder="Selecciona una Fecha" >
                           
-                                </div>
-                             
-                                 <div class="input-field col s12 m6" position= "relative">
-                                     <i class="material-icons prefix">access_time</i>
-                                     <input id="timepicker" type="text" name="time" 
-                                        class="timepicker" placeholder="Selecciona una Hora">                                     
-                                 </div> 
-                             </div>
-                         
-                             <div class="row">
-                                 <button class="btn waves-effect weves-light" type="submit">
-                                     Agendar  <i class="material-icons right">send</i>
-                                 </button>
-                             </div>
-                         </form>                        
+                         @include('theme.includes.user.patient.schedule_form',
+                         ['route'=> route('backoffice.patient.store_back_schedule',$user)
+                         ])
+
                      </div>
                 </div>
              </div>
@@ -97,13 +49,17 @@
 @endsection
 
 @section('foot')
+    
+    @include('theme.includes.user.patient.schedule_foot',[
+        'material_select' => 'material_select'
+    ])
 
-    <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/picker.js')}}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/picker.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/legacy.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/picker.date.js')}}"></script> 
     <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/picker.time.js')}}"></script>
    
-    {{-- ////////////////////////////////////////////////////////// --}}
+    {{-- ////////////////////////////////////////////////////////// 
     <script>
         var input_date= $('.datepicker').pickadate({
             min: true, //Des Habilita Fechas Pasadas
@@ -129,7 +85,7 @@
 
         var date_picker = input_date.pickadate('picker');       
       
-     ////////////////////////////////////////////////// --}}
+     ////////////////////////////////////////////////// 
     
         var input_time = $('.timepicker').pickatime({
             min: [7,0],
@@ -144,6 +100,6 @@
 
         var time_picker = input_time.pickatime('picker');
         
-    </script>
+    </script> --}}
 
 @endsection

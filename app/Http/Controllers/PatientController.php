@@ -13,12 +13,12 @@ class PatientController extends Controller
 {
     public function schedule(){
         return view('theme.frontoffice.pages.user.patient.schedule',[
+            'user' => auth() ->user(),
             'specialities' => \App\Speciality::all(), 
         ]);
     }
 
     public function store_schedule(Request $request, Appointment $appointment, Invoice $invoice){
-
         $invoice = $invoice->store($request);
         $appointment = $appointment->store($request, $invoice);
         toast('Cita Creada!','success', 'top-right');
@@ -28,7 +28,15 @@ class PatientController extends Controller
     public function back_schedule(User $user){
         return view('theme.backoffice.pages.user.patient.schedule',[
             'user' => $user,
+            'specialities' => \App\Speciality::all(), 
         ]);
+    }
+
+    public function store_back_schedule(Request $request, User $user, Appointment $appointment, Invoice $invoice){       
+        $invoice = $invoice->store($request);
+        $appointment = $appointment->store($request, $invoice);
+        toast('Cita Creada!','success', 'top-right');
+        return redirect()->route('backoffice.user.show', $user);
     }
 
     public function appointments(){

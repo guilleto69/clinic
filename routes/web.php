@@ -32,8 +32,12 @@ Route::get('text', function(){
 
     Route::get('patient/{user}/schedule', 'PatientController@back_schedule')
         ->name('patient.schedule');
+    Route::post('patient/{user}/store_back_schedule', 'PatientController@store_back_schedule')
+        ->name('patient.store_back_schedule');
+
     Route::get('patient/{user}/appointment', 'PatientController@back_appointments')
-        ->name('patient.appointments');
+        ->name('patient.appointments');    
+
     Route::get('patient/{user}/invoice', 'PatientController@back_invoices')
         ->name('patient.invoices');
 
@@ -72,7 +76,10 @@ Route::group([ 'as' => 'frontoffice.'], function(){
 
     Route::get('patient/schedule','PatientController@schedule')
         ->name('patient.schedule');
+
+   /*  LLAMADO POST */
     Route::post('patient/store_schedule', 'PatientController@store_schedule')->name('patient.store_schedule');
+
     Route::get('patient/appointments','PatientController@appointments')
         ->name('patient.appointments');
     Route::get('patient/prescriptions','PatientController@prescriptions')
