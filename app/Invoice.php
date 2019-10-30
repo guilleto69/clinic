@@ -29,11 +29,12 @@ class Invoice extends Model
     #ALMACENAMIENTO
 
     public function store($request){
-                
+            $user =  User::findOrFail(decrypt($request->user_id)); //id de User de la Cita
+            
             return self::create([
                 'amount' => 500,
                 'status' => 'pending',
-                'user_id' => $request->user()->id
+                'user_id' => $user->id
             ]);
 
             
