@@ -34,9 +34,11 @@ Route::get('text', function(){
         ->name('patient.schedule');
     Route::post('patient/{user}/store_back_schedule', 'PatientController@store_back_schedule')
         ->name('patient.store_back_schedule');
-
+    
     Route::get('patient/{user}/appointment', 'PatientController@back_appointments')
-        ->name('patient.appointments');    
+        ->name('patient.appointments');
+    Route::get('patient/{user}/appointments/{appointment}/edit','PatientController@back_appointments_edit')
+        ->name('patient.appointments.edit');   
 
     Route::get('patient/{user}/invoice', 'PatientController@back_invoices')
         ->name('patient.invoices');

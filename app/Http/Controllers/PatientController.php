@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Appointment;
 use App\Invoice;
 use App\User;
+
 use Illuminate\Http\Request;
 
 
@@ -13,7 +14,7 @@ class PatientController extends Controller
 {
     public function schedule(){
         return view('theme.frontoffice.pages.user.patient.schedule',[
-            'user' => auth() ->user(),
+            'user' => user(), //Helper Nuestro
             'specialities' => \App\Speciality::all(), 
         ]);
     }
@@ -46,9 +47,15 @@ class PatientController extends Controller
     }
 
     public function back_appointments(User $user){
-        return view('theme.backoffice.pages.user.patient.appointment', ['user'=>$user,        
+        return view('theme.backoffice.pages.user.patient.appointment', [
+            'user'=>$user,  
+            'appointments' => $user->appointments->sortBy('date'),      
         ]
     );
+    }
+
+    public function back_appointments_edit(User $user, Appointment $appointment){
+        dd('editar Cita', $appointment);
     }
 
     public function prescriptions(){

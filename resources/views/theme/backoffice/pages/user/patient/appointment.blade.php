@@ -31,28 +31,11 @@
                 <div class="col s12 m8">
                     <div class="card">                    
                         <div class="card-content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Dia</th>
-                                        <th>Hora</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                        
-                                <tbody>
-                                    <td>754</td>
-                                    <td> 25/02/2019</td>
-                                    <td>15:00</td>
-                                    <td>En Progreso</td>
-                                    <td><a href="">Editar</a></td>
-                                    {{-- @foreach ($collection as $item)
-                                        
-                                    @endforeach  --}}                              
-                                </tbody>
-                            </table>    
+
+                            @include('theme.includes.user.patient.appointments',[
+                                'update' => true
+                            ]) 
+                            
                         </div>
                     </div>
                 </div>
