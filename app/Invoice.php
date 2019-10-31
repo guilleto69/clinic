@@ -19,7 +19,7 @@ class Invoice extends Model
     }   
 
     public function appointment(){
-        return $this->belongsTo('App\Appointment');
+        return $this->hasOne('App\Appointment');
     }
 
     public function metas(){

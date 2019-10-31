@@ -23,7 +23,7 @@
                             <span class="card-title">@yield('title')</span>
                           
                             @include('theme.includes.user.patient.schedule_form',[
-                                'route' => route('frontoffice.patient.store_schedule')
+                                'route' => '#'
                             ])
                         </div>
                     </div>

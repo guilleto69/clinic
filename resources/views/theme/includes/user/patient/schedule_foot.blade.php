@@ -1,15 +1,9 @@
-<script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/legacy.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.date.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/frontoffice/Plugins/Pickadate/picker.time.js')}}"></script>
 
-  
-    <script type="text/javascript">
-        $('select').{!! $material_select !!}(); //inicializa Selector  para Front o Back Office  Schedule.blade     
-    </script>
-   
-
-<script>
+{{-- <script>
     function enviar_formulario()
     {
         /* document.delete_form.submit(); */            
@@ -35,11 +29,10 @@
                     }
                 );
     }
-</script> 
+</script>  --}}
 
 {{-- ////////////////////////////////////////////////////////// --}}
 <script>
-             
         var input_date= $('.datepicker').pickadate({ 
             
             monthsFull: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio','Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
@@ -71,47 +64,50 @@
         });
 
         var time_picker = input_time.pickatime('picker'); 
-    </script>
+    
+    /*  //////////////////////////////////////////////////  */
         
-  {{-- ////////////////////////////////////////////////// --}}  
-    <script>
-         var speciality = $('#speciality');
-        var doctor = $('#doctor');
+        @if(!isset($appointment))
+            $('select').{!! $material_select !!}(); 
 
-        speciality.change(function(){
-            $.ajax({
-                url: "{{ route('ajax.user_speciality') }}",
-                method: 'GET',
-                data: {
-                    speciality: speciality.val(),
-                },
-                success: function(data){
-                    doctor.empty();
-                    doctor.append('<option disabled= "selected">-- Selecciona un Medico --</option>');
+            var speciality = $('#speciality');
+            var doctor = $('#doctor');
 
-                    $.each(data, function(index,element){
-                        doctor.append('<option value="  ' +element.id + '">            '+ element.name + '</option>')
-                    });
-                    doctor.{!! $material_select !!}();
-                }
+            speciality.change(function(){
+                $.ajax({
+                    url: "{{ route('ajax.user_speciality') }}",
+                    method: 'GET',
+                    data: {
+                        speciality: speciality.val(),
+                    },
+                    success: function(data){
+                        doctor.empty();
+                        doctor.append('<option disabled= "selected">-- Selecciona un Medico --</option>');
+
+                        $.each(data, function(index,element){
+                            doctor.append('<option value="  ' +element.id + '">            '+ element.name + '</option>')
+                        });
+                        doctor.{!! $material_select !!}();
+                    }
+                });
+            }); 
+
+            doctor.change(function(){
+                date_picker.set({
+                    disable: [
+                        [2019,9,30]
+                    ],
+                });
+
+                time_picker.set({
+                    min:[9,30],
+                    max:[21,0],
+                    disable:[
+                        { from: [14,0], to: [15,30]},
+                        [10,0],
+                    ],
+                });
             });
-        }); 
-
-        doctor.change(function(){
-            date_picker.set({
-                disable: [
-                    [2019,9,30]
-                ],
-            });
-
-            time_picker.set({
-                min:[9,30],
-                max:[21,0],
-                disable:[
-                    { from: [14,0], to: [15,30]},
-                    [10,0],
-                ],
-            });
-        });
+        @endif
 
     </script>

@@ -47,25 +47,32 @@
               </li>
 
               <li class="bold">
+                  <a href="{{ route('backoffice.patient.appointments.show')}}" class="waves-effect waves-cyan">
+                      <i class="material-icons">library_add</i>
+                      <span class="nav-text">Citas del Sistema</span>
+                    </a>
+              </li>
+
+              <li class="bold">
                   <a href="{{ route('backoffice.role.index')}}" class="waves-effect waves-cyan">
                       <i class="material-icons">settings</i>
                       <span class="nav-text">Roles del Sistema</span>
                     </a>
-                </li>
+               </li>
               
-                <li class="bold">
-                    <a href="{{ route('backoffice.permission.index')}}" class="waves-effect waves-cyan">
-                        <i class="material-icons">vpn_key</i>
-                        <span class="nav-text">Permisos del Sistema</span>
-                      </a>
-                  </li>
+              <li class="bold">
+                  <a href="{{ route('backoffice.permission.index')}}" class="waves-effect waves-cyan">
+                      <i class="material-icons">vpn_key</i>
+                      <span class="nav-text">Permisos del Sistema</span>
+                    </a>
+                </li>
 
-                  <li class="bold">
-                      <a href="{{ route('backoffice.speciality.index')}}" class="waves-effect waves-cyan">
-                          <i class="material-icons">local_hospital</i>
-                          <span class="nav-text">Especialidades Mèdicas</span>
-                        </a>
-                    </li>  
+                <li class="bold">
+                    <a href="{{ route('backoffice.speciality.index')}}" class="waves-effect waves-cyan">
+                        <i class="material-icons">local_hospital</i>
+                        <span class="nav-text">Especialidades Mèdicas</span>
+                      </a>
+                  </li>  
 
             </ul>
           </li>

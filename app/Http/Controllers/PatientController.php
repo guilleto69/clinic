@@ -54,8 +54,58 @@ class PatientController extends Controller
     );
     }
 
+    public function show_appointments(){
+        $appointments_collection = Appointment::all();
+        $appointments=[];
+
+        foreach ($appointments_collection as $key => $appointment) {
+            
+            $appointments[] = [
+                'title' => $appointment->user->name. 
+                    ' :Cita con: '. 
+                    $appointment->doctor()->name,
+                'start' => $appointment->date->format('Y-m-d\TH:i:s'),
+                'url' =>route('backoffice.patient.appointments.edit',[$appointment->user, $appointment])
+            ];            
+        }
+        /* dd($appointments); */
+        return view('theme.backoffice.pages.appointment.show',[
+          'appointments' => json_encode($appointments),
+        ]);
+    }
+
+    public function show_doctor_appointments(User $user){
+        $appointments_collection = Appointment::where('doctor_id', $user->id)->get();
+        $appointments=[];
+
+        foreach ($appointments_collection as $key => $appointment) {
+            
+            $appointments[] = [
+                'title' => $appointment->user->name. 
+                    ' :Cita con: '. 
+                    $appointment->doctor()->name,
+                'start' => $appointment->date->format('Y-m-d\TH:i:s'),
+                'url' =>route('backoffice.patient.appointments.edit',[$appointment->user, $appointment])
+            ];            
+        }
+        /* dd($appointments); */
+        return view('theme.backoffice.pages.appointment.show',[
+            'user' => $user,
+            'appointments' => json_encode($appointments),
+        ]);
+    }
+
     public function back_appointments_edit(User $user, Appointment $appointment){
-        dd('editar Cita', $appointment);
+        return view('theme.backoffice.pages.user.patient.appointment_edit',[
+            'user' => $user,
+            'appointment' => $appointment
+        ]);
+    }
+
+    public function back_appointments_update(Request $request, User $user, Appointment $appointment){
+        $appointment->my_update($request);
+        toast('Cita Actualizada!','success', 'top-right');
+        return redirect()->route('backoffice.user.show', $user);
     }
 
     public function prescriptions(){
