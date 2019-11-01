@@ -1,34 +1,42 @@
 <form action="{{ $route }}" method="POST">
     @csrf
-    
-    @if (!isset($appointment))
+    {{-- esta Editando? --}}
+    @if(!isset($appointment)) 
 
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">local_hospital</i>
-                <select id="speciality" name="speciality" >
+            @if ( user()->has_role(config('app.doctor_role')) )
+                
+                <input type="hidden" name="doctor" value="{{ user()->id}}">
+            @else
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">local_hospital</i>
+                        <select id="speciality" name="speciality" >
+                                    
+                            <option disabled="" selected="">            --    Selecciona una Especialidad --</option>
                             
-                    <option disabled="" selected="">            --    Selecciona una Especialidad --</option>
-                    
-                    @foreach ($specialities as $speciality)
-                        <option value="{{ $speciality->id}}">
-                            {{ $speciality->name}}</option>
-                    @endforeach
-                </select>
-                <label for="">                 Selecciona la Especialidad</label>
-            </div>
-        </div>
+                            @foreach ($specialities as $speciality)
+                                <option value="{{ $speciality->id}}">
+                                    {{ $speciality->name}}</option>
+                            @endforeach
+                        </select>
+                        <label for="">                 Selecciona la Especialidad</label>
+                    </div>
+                </div>
 
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">assignment_ind</i>
-                <select id="doctor" name="doctor" >
-                        <option disabled="" selected="">          --    Selecciona una Especialidad Primero --</option>
-                    
-                </select>
-                <label for="">Selecciona al Doctor</label>
-            </div>
-        </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">assignment_ind</i>
+                        <select id="doctor" name="doctor"  >
+                                <option disabled="" selected="">          --    Selecciona una Especialidad Primero --</option>
+                            
+                        </select>
+                        <label for="">Selecciona al Doctor</label>
+                    </div>
+                </div>
+            
+                
+            @endif
+                
             
         @else
           

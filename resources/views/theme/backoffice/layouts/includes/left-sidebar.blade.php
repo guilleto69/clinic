@@ -46,13 +46,24 @@
                     </a>
               </li>
 
-              <li class="bold">
+              @if(user()->has_role(config('app.doctor_role')))
+                  <li class="bold">
+                    <a href="{{ route('backoffice.doctor.appointments.show', user()->id)}}" class="waves-effect waves-cyan">
+                        <i class="material-icons">library_add</i>
+                        <span class="nav-text">Mis Citas </span>
+                      </a>
+                  </li>              
+                  
+              @else
+                <li class="bold">
                   <a href="{{ route('backoffice.patient.appointments.show')}}" class="waves-effect waves-cyan">
                       <i class="material-icons">library_add</i>
                       <span class="nav-text">Citas del Sistema</span>
                     </a>
-              </li>
+                </li>
+              @endif
 
+              
               <li class="bold">
                   <a href="{{ route('backoffice.role.index')}}" class="waves-effect waves-cyan">
                       <i class="material-icons">settings</i>

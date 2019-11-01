@@ -39,6 +39,7 @@ Route::get('text', function(){
         ->name('patient.appointments.show');
     Route::get('backoffice/doctor/{user}/appointments','PatientController@show_doctor_appointments')
         ->name('doctor.appointments.show');
+    /* /////// OJO...... apointmen sin SSSS */
     Route::get('patient/{user}/appointment', 'PatientController@back_appointments')
         ->name('patient.appointments');
     Route::get('patient/{user}/appointments/{appointment}/edit','PatientController@back_appointments_edit')
