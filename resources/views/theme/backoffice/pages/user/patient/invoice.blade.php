@@ -10,7 +10,7 @@
 
 <li><a href="{{route('backoffice.user.index')}}" >Usuarios del Sistema</a></li>
 <li><a href="{{route('backoffice.user.show', $user)}}" >{{ $user->name }}</a></li>
-<li><a href="{{route('backoffice.patient.invoices', $user)}}" >{{'Facturas de: ' . $user->name }}</a></li>
+<li><a href="{{route('backoffice.patient.invoice', $user)}}" >{{'Facturas de: ' . $user->name }}</a></li>
 @endsection
 
 
@@ -33,28 +33,7 @@
                 <div class="col s12 m8">
                     <div class="card">                    
                         <div class="card-content">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Monto</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                        
-                                <tbody>
-                                    <td>754</td>
-                                    <td>500</td>
-                                    <td>25/02/2019</td>
-                                    <td>En Progreso</td>
-                                    <td><a href="">Editar</a></td>
-                                    {{-- @foreach ($collection as $item)
-                                        
-                                    @endforeach  --}}                              
-                                </tbody>
-                            </table>    
+                            @include('theme.includes.user.patient.invoice_table')  
                         </div>
                     </div>
                 </div>
@@ -63,10 +42,11 @@
                         @include('theme.backoffice.pages.user.includes.user_nav')
                 </div> 
             </div>                   
-        </div>                        
+        </div>   
+        @include('theme.includes.user.patient.invoice_modal')                     
     </div>
 @endsection
 
 @section('foot')
-
+    @include('theme.includes.user.patient.invoice_foot') 
 @endsection

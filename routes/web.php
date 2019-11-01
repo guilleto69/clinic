@@ -47,8 +47,12 @@ Route::get('text', function(){
         ->name('patient.appointments.update');  
 
 
-    Route::get('patient/{user}/invoices', 'PatientController@back_invoices')
-        ->name('patient.invoices');
+    Route::get('patient/{user}/invoice', 'PatientController@back_invoice')
+        ->name('patient.invoice');
+    Route::get('patient/{user}/invoice/{invoice}/edit', 'PatientController@back_invoice_edit')
+        ->name('patient.invoice.edit');
+    Route::post('patient/{user}/invoice/{invoice}/update', 'PatientController@back_invoice_update')
+        ->name('patient.invoice.update');
 
     Route::resource('role', 'RoleController');
     Route::get('user/{user}/assign_role', 'UserController@assign_role')

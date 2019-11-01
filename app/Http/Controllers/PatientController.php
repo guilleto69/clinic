@@ -118,9 +118,24 @@ class PatientController extends Controller
         ]);
     }
 
-    public function back_invoices(User $user){
-        return view('theme.backoffice.pages.user.patient.invoice', ['user'=>$user,
+    public function back_invoice(User $user){
+        return view('theme.backoffice.pages.user.patient.invoice', [
+            'user'=>$user,
+            'invoices' => $user->invoices,
         ]
     );        
+    }
+
+    public function back_invoice_edit(User $user, Invoice $invoice){
+        return view('theme.backoffice.pages.invoice.edit',[
+            'user' => $user,
+            'invoice' => $invoice
+        ]);
+    }
+
+    public function back_invoice_update(Request $request, User $user, Invoice $invoice){
+        $invoice->my_update($request);
+        toast('Factura Actualizada!','success', 'top-right');
+        return redirect()->route('backoffice.user.show', $user);
     }
 }
