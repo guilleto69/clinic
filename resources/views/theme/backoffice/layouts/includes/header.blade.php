@@ -1,7 +1,7 @@
 <header id="header" class="page-topbar">
       
-        <div class="navbar-fixed">
-          <nav class="navbar-color gradient-45deg-light-blue-cyan">
+        <div class="navbar-fixed"> {{-- gradient-45deg-light-blue-cyan --}}
+          <nav class="navbar-color gradient-45deg-indigo-light-blue">
             <div class="nav-wrapper">
   
               <ul class="left">
@@ -30,10 +30,10 @@
                 
                 <li>
                   <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
-                    <span class="avatar-status avatar-online">
-                      <img src="/images/avatar/avatar-7.png" alt="avatar">
+                    {{-- <span class="avatar-status avatar-online">
+                      <img src=" /images/avatar/avatar-7.png " alt="avatar">
                       <i></i>
-                    </span>
+                    </span> --}}
                   </a>
                 </li>
                 

@@ -54,6 +54,32 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasMany('App\Appointment');
         }
 
+        public function clinic_datas()
+        {
+            return $this->hasMany('App\ClinicData');
+        }
+
+        public function clinic_notes()
+        {
+            return $this->hasMany('App\ClinicNote');
+        }
+
+        public function doctor_schedules()
+        {
+            return $this->hasMany('App\DoctorSchedule');
+        }
+
+        public function disable_dates()
+        {
+            return $this->hasMany('App\DisableDate');
+        }
+
+        public function disable_times()
+        {
+            return $this->hasMany('App\DisableTime');
+        }
+
+
     //ALMACENAMIENTO
         public function store ($request)
         {
@@ -189,6 +215,23 @@ class User extends Authenticatable implements MustVerifyEmail
             $specialities = $this->specialities->pluck('name')->toArray();
             $string = implode(', ', $specialities);
             return $string;
+        }
+
+        public function clinic_data_array()
+        {
+            $datas = $this->clinic_datas->pluck('value','key')->toArray();
+            return $datas;
+        }
+
+        public function clinic_data($key, $array = null, $default = null)
+        {   
+            $array = (!is_null($array)) ? $array : $this->clinic_data_array();
+            if(array_key_exists($key, $array)){
+                $value = $array[$key];
+            }else{
+                $value = $default;
+            } 
+            return $value;
         }
 
     //OTRAS OPERACIONES

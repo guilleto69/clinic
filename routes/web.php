@@ -35,10 +35,19 @@ Route::get('text', function(){
     Route::post('patient/{user}/store_back_schedule', 'PatientController@store_back_schedule')
         ->name('patient.store_back_schedule');
 
+    Route::resource('patient/{user}/clinic_data', 'ClinicDataController', ['only' => [
+        'index', 'create', 'store'
+    ]]);
+
+    Route::resource('patient/{user}/clinic_note', 'ClinicNoteController', ['only' => [
+        'store', 'edit', 'update', 'destroy'
+    ]]);
+
     Route::get('backoffice/appointments','PatientController@show_appointments')
         ->name('patient.appointments.show');
     Route::get('backoffice/doctor/{user}/appointments','PatientController@show_doctor_appointments')
         ->name('doctor.appointments.show');
+
     /* /////// OJO...... apointmen sin SSSS */
     Route::get('patient/{user}/appointment', 'PatientController@back_appointments')
         ->name('patient.appointments');
@@ -73,6 +82,11 @@ Route::get('text', function(){
     Route::post('user/{user}speciality_assignment',
       'UserController@speciality_assignment')
         ->name('user.speciality_assignment');
+
+    Route::get('doctor/{user}/doctor_schedule', 'DoctorScheduleController@assign')
+    ->name('doctor.schedule.assign');
+    Route::post('doctor/{user}/doctor_schedule', 'DoctorScheduleController@assignment')
+        ->name('doctor.schedule.assignment');
        
 });
 
@@ -107,5 +121,7 @@ Route::group(['middleware' => ['auth'], 'as' => 'ajax.'], function(){
     ->name('user_speciality');
     Route::get('invoice_info', 'AjaxController@invoice_info')
     ->name('invoice_info');
+    Route::get('note_info', 'AjaxController@note_info')
+	->name('note_info');
     
 });

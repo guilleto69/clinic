@@ -53,7 +53,7 @@
     @include('theme.includes.user.patient.schedule_foot',[
         'material_select' => 'material_select'
     ])
-
+@endsection
     {{-- <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/picker.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/legacy.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/backoffice/Plugins/Pickadate/picker.date.js')}}"></script> 
@@ -102,4 +102,3 @@
         
     </script> --}}
 
-@endsection

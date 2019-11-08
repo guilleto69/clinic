@@ -7,12 +7,16 @@
                         config('app.doctor_role')
                 ]))
                 @if($user->has_role(config('app.patient_role')))  
+                        
+                        <a href="{{ route('backoffice.clinic_data.index', $user) }}"  class="collection-item">Historia Clínica</a>
                         <a href="{{ route('backoffice.patient.schedule', $user) }}" class="collection-item">Agendar Cita</a>
                         <a href="{{ route('backoffice.patient.appointments', $user) }}" class="collection-item">Citas</a>     
                         <a href="{{ route('backoffice.patient.invoice', $user) }}" class="collection-item">Facturas</a>
                 @endif
                 @if ($user->has_role(config('app.doctor_role')))
                     <a href="{{ route('backoffice.doctor.appointments.show',$user) }}" class="collection-item">Citas</a>
+                    <a href="{{ route('backoffice.doctor.schedule.assign', $user) }}" class="collection-item">Gestión de Horarios</a>
+
                 @endif
         @endif
 

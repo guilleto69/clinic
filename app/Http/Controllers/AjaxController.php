@@ -6,6 +6,18 @@ use Illuminate\Http\Request;
 
 class AjaxController extends Controller
 {
+    public function note_info(Request $request)
+    {
+        if($request->ajax()){
+            $note = \App\ClinicNote::findOrFail($request->note_id);
+            return response()->json([
+                'route' => route('backoffice.clinic_note.update', [$note->user, $note]),
+                'description' => $note->description,
+                'privacy' => $note->privacy
+            ]);
+        }
+    }
+
     public function user_speciality(Request $request)
     {
         if( $request->ajax() ){
@@ -27,4 +39,6 @@ class AjaxController extends Controller
             ]);
         }
     }
+
+    
 }
